@@ -1,6 +1,9 @@
 # OS
 .idea/
 
+# Python
+__pycache__/
+
 #Environment variables
 .env
 /env/vars
