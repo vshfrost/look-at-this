@@ -1,0 +1,6 @@
+# OS
+.idea/
+
+#Environment variables
+.env
+/env/vars
