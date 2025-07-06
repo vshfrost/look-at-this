@@ -11,6 +11,7 @@ services:
     volumes:
       - ./app:/application/app
       - ./database:/application/database
+      - ./tests:/application/tests
     ports:
       - "${APP_PORT}:${APP_PORT}"
     depends_on:
