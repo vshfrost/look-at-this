@@ -6,6 +6,7 @@ COPY app/ ./app
 COPY .env ./.env
 COPY database/ ./database
 COPY requirements/ ./requirements
+COPY tests/ ./tests
 COPY env/app/start.sh ./app-start.sh
 
 RUN chmod +x ./app-start.sh
