@@ -8,6 +8,9 @@ from alembic import context
 from database.tools.sqlalchemy.connection import SYNC_DATABASE_URL
 from database.tools.sqlalchemy.orm import Base
 
+# Models
+from shared.infrastructure.models.clothes import Clothes
+
 
 # Get project root path (2 levels up from alembic folder)
 # sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
