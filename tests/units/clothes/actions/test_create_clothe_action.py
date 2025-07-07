@@ -1,5 +1,7 @@
 from typing import BinaryIO
+from unittest import mock
 from unittest.mock import create_autospec
+from uuid import UUID
 
 from _pytest.fixtures import fixture
 from fastapi import UploadFile
@@ -18,7 +20,14 @@ class TestCreateClotheAction:
     def mock_clothe_images_client(self):
         return create_autospec(ClotheImagesClient)
 
-    def test_create_clothe_action(self, mock_clothes_repository, mock_clothe_images_client):
+    @fixture
+    def mock_id_generator(self):
+        with mock.patch('shared.domain.uuid.uuid7') as mock_id_generator:
+            yield mock_id_generator
+
+    def test_create_clothe_action(self, mock_clothes_repository, mock_clothe_images_client, mock_id_generator):
+        mock_id_generator.return_value = UUID("123e4567-e89b-12d3-a456-426614174000")
+
         image = UploadFile(filename="image.jpg", file=BinaryIO())
 
         params = CreateClotheActionParameters(image=image)
@@ -26,6 +35,10 @@ class TestCreateClotheAction:
             clothe_images_client=mock_clothe_images_client,
             clothes_repository=mock_clothes_repository,
         ).execute(params=params)
+
+        saved_clothe = mock_clothes_repository.save.call_args[0][0]
+
+        assert saved_clothe.image.file_path == "media/123e4567-e89b-12d3-a456-426614174000.jpg"
 
         mock_clothe_images_client.upload.assert_called_once()
         mock_clothes_repository.save.assert_called_once()

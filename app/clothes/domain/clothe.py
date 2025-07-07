@@ -19,6 +19,10 @@ class ClotheImage:
 
         return cls(file_path=file_path)
 
+    @property
+    def file_path(self) -> str:
+        return self._file_path
+
 class Clothe:
     def __init__(self, id: Uuid, image: ClotheImage):
         self._id = id
