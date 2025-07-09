@@ -38,3 +38,7 @@ class Clothe:
     @property
     def image(self) -> ClotheImage:
         return self._image
+
+    @property
+    def id(self) -> Uuid:
+        return self._id
