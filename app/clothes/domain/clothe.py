@@ -31,10 +31,14 @@ class Clothe:
     @classmethod
     def create(cls) -> typing.Self:
         id = Uuid.create()
-        image = ClotheImage.create(file_name=id.value)
+        image = ClotheImage.create(file_name=id.to_string())
 
         return cls(id=id, image=image)
 
     @property
     def image(self) -> ClotheImage:
         return self._image
+
+    @property
+    def id(self) -> Uuid:
+        return self._id

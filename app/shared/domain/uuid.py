@@ -12,5 +12,8 @@ class Uuid:
         return cls(uuid=uuid7())
 
     @property
-    def value(self) -> str:
-        return str(self._uuid)
+    def value(self) -> UUID:
+        return self._uuid
+
+    def to_string(self) -> str:
+        return str(self.value)
