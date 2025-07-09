@@ -1,6 +1,5 @@
 from typing import BinaryIO
 from unittest import mock
-from unittest.mock import create_autospec
 from uuid import UUID
 
 from _pytest.fixtures import fixture
@@ -14,11 +13,11 @@ from clothes.domain.contracts.clothes_repository import ClothesRepository
 class TestCreateClotheAction:
     @fixture
     def mock_clothes_repository(self):
-        return create_autospec(ClothesRepository)
+        return mock.create_autospec(ClothesRepository, instance=True, spec_set=True)
 
     @fixture
     def mock_clothe_images_client(self):
-        return create_autospec(ClotheImagesClient)
+        return mock.create_autospec(ClotheImagesClient, instance=True, spec_set=True)
 
     @fixture
     def mock_id_generator(self):
