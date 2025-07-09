@@ -2,6 +2,7 @@
 fastapi==0.115.12
 uvicorn==0.34.3
 uuid6==2025.0.1
+pillow==11.3.0
 
 #Database
 sqlalchemy==2.0.41
