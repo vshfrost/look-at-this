@@ -25,7 +25,7 @@ class TestSQLAlchemyAsyncClothesRepository:
             )
         )
 
-        await SQLAlchemyAsyncClothesRepository(session=mock_async_session).save(clothe)
+        await SQLAlchemyAsyncClothesRepository(session=mock_async_session).save(clothe=clothe)
 
         saved_clothe_model = mock_async_session.add.call_args[0][0]
 
