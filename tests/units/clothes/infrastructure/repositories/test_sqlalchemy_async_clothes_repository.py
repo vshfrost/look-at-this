@@ -5,11 +5,11 @@ import pytest
 from _pytest.fixtures import fixture
 
 from clothes.domain.clothe import Clothe, ClotheImage
-from clothes.infrastructure.repositories.sqlalchemy_clothes_repository import SQLAlchemyClothesRepository
+from clothes.infrastructure.repositories.sqlalchemy_async_clothes_repository import SQLAlchemyAsyncClothesRepository
 from shared.domain.uuid import Uuid
 
 
-class TestClothesRepository:
+class TestSQLAlchemyAsyncClothesRepository:
     @fixture
     def mock_async_session(self):
         with mock.patch('sqlalchemy.ext.asyncio.AsyncSession') as mock_async_session:
@@ -25,7 +25,7 @@ class TestClothesRepository:
             )
         )
 
-        await SQLAlchemyClothesRepository(session=mock_async_session).save(clothe)
+        await SQLAlchemyAsyncClothesRepository(session=mock_async_session).save(clothe)
 
         saved_clothe_model = mock_async_session.add.call_args[0][0]
 

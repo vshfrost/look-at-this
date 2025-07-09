@@ -4,7 +4,7 @@ from shared.infrastructure.models.clothes import Clothes
 from shared.infrastructure.repositories.base_async_repository import BaseAsyncRepository
 
 
-class SQLAlchemyClothesRepository(ClothesRepository, BaseAsyncRepository):
+class SQLAlchemyAsyncClothesRepository(ClothesRepository, BaseAsyncRepository):
      async def save(self, clothe: Clothe) -> None:
         clothe_to_save = Clothes(
             id=clothe.id.value,
