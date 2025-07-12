@@ -5,10 +5,10 @@ from typing import BinaryIO
 from PIL import Image
 
 from clothes.domain.clothe import Clothe
-from clothes.domain.contracts.clothe_images_client import ClotheImagesClient
+from clothes.domain.contracts.async_clothe_images_client import AsyncClotheImagesClient
 
 
-class LocalAsyncClotheImagesClient(ClotheImagesClient):
+class LocalAsyncClotheImagesClient(AsyncClotheImagesClient):
     async def upload(self, clothe: Clothe, image: BinaryIO) -> None:
         await asyncio.to_thread(self._process_and_upload, clothe=clothe, image=image)
 
