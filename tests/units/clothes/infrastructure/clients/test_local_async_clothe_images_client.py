@@ -4,7 +4,9 @@ from unittest import mock
 
 import pytest
 from _pytest.fixtures import fixture
+from fastapi import UploadFile
 
+from clothes.application.adapters.fastapi_image_adapter import FastAPIImageAdapter
 from clothes.domain.clothe import Clothe, ClotheImage
 from clothes.infrastructure.clients.local_async_clothe_images_client import LocalAsyncClotheImagesClient
 
@@ -29,7 +31,8 @@ class TestLocalAsyncClotheImagesClient:
         mock_image_to_process = mock.Mock()
         mock_image_processor_open_call.return_value = mock_image_to_process
 
-        file = BinaryIO()
+        image = UploadFile(filename='test.jpg', file=BinaryIO())
+        image_adapted = FastAPIImageAdapter(image=image)
         clothe = Clothe(
             id=typing.Any,
             image=ClotheImage(
@@ -37,7 +40,7 @@ class TestLocalAsyncClotheImagesClient:
             )
         )
 
-        await LocalAsyncClotheImagesClient().upload(clothe=clothe, image=file)
+        await LocalAsyncClotheImagesClient().upload(clothe=clothe, image=image_adapted)
 
         mock_image_to_process.thumbnail.assert_called_once_with(size=(1024, 1024))
         mock_image_to_process.save.assert_called_once_with(
