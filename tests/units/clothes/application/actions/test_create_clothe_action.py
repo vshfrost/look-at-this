@@ -6,7 +6,8 @@ import pytest
 from _pytest.fixtures import fixture
 from fastapi import UploadFile
 
-from clothes.actions.create_clothe_action import CreateClotheActionParameters, CreateClotheAction
+from clothes.application.actions.async_create_clothe_action import CreateClotheActionParameters, AsyncCreateClotheAction
+from clothes.application.adapters.fastapi_image_adapter import FastAPIImageAdapter
 from clothes.domain.contracts.async_clothe_images_client import AsyncClotheImagesClient
 from clothes.domain.contracts.async_clothes_repository import AsyncClothesRepository
 
@@ -30,9 +31,10 @@ class TestCreateClotheAction:
         mock_id_generator.return_value = UUID("123e4567-e89b-12d3-a456-426614174000")
 
         image = UploadFile(filename="image.jpg", file=BinaryIO())
+        image_adapted = FastAPIImageAdapter(image=image)
 
-        params = CreateClotheActionParameters(image=image)
-        await CreateClotheAction(
+        params = CreateClotheActionParameters(image=image_adapted)
+        await AsyncCreateClotheAction(
             clothe_images_client=mock_clothe_images_client,
             clothes_repository=mock_clothes_repository,
         ).execute(params=params)
