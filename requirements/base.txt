@@ -1,6 +1,7 @@
 # Application
 fastapi==0.115.12
 uvicorn==0.34.3
+python-multipart==0.0.20
 uuid6==2025.0.1
 pillow==11.3.0
 

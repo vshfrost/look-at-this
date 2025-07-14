@@ -1,5 +1,4 @@
 from fastapi import APIRouter
-from starlette import status
 
 from clothes.infrastructure.views.add_clothe_view import AddClotheView
 
